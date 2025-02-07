@@ -8,10 +8,10 @@ exports.signUp = async (req, res) => {
     // res.status(200).json('Signup user')
     // console.log('signup account');
     try {
-        const { fullname, username, password, confirmpassword, gender } = req.body;
-        // if (password !== confirmpassword) {
-        //     return res.status(400).json("Password mismatch")
-        // }
+        const { fullname, username, password, confirmPassword, gender } = req.body;
+        if (password !== confirmPassword) {
+            return res.status(400).json("Password mismatch")
+        }
         const user = await User.findOne({ username: username })
         if (user) {
             return res.status(400).json("Username already exists")
